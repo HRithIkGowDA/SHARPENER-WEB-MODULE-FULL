@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+
+      rel="stylesheet"
+
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+
+    />
+
+    <title>Item Lister</title>
+
+  </head>
+
+  <body>
+
+    <header id="main-header" class="bg-success text-white p-4 mb-3">
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-md-6">
+
+            <h1 id="header-title">Item Lister</h1>
+
+          </div>
+
+          <div class="col-md-6 align-self-center">
+
+            <input
+
+              type="text"
+
+              class="form-control"
+
+              id="filter"
+
+              placeholder="Search Items..."
+
+            />
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+    <div>
+
+      <div class="container">
+
+        <div id="main" class="card card-body">
+
+          <form id="addForm" class="form-inline mb-3">
+
+            <label type="text">Add Items</label>
+
+            <input type="text" class="form-control mr-2" id="item" />
+
+            <label type="text">Add Description</label>
+
+              <input type="text" class="form-control mr-3" id="description" /><br><br>
+
+              <input type="submit" class="btn btn-dark" value="Submit" />
+
+            </form>
+
+          </form>
+
+        </div>
+
+        <h2 class="title">Items</h2>
+
+        <ul id="items" class="list-group">
+
+          <li class="list-group-item">
+
+            Item 1
+
+            <button class="btn btn-edit btn-#ccc float-right edit">edit</button>
+
+            <button class="btn btn-danger btn-sm float-right delete">X</button>
+
+          </li>
+
+          <li class="list-group-item">
+
+            Item 2
+
+            <button class="btn btn-edit btn-#ccc float-right edit">edit</button>
+
+            <button class="btn btn-danger btn-sm float-right delete">X</button>
+
+          </li>
+
+          <li class="list-group-item">
+
+            Item 3
+
+            <button class="btn btn-edit btn-#ccc float-right edit">edit</button>
+
+            <button class="btn btn-danger btn-sm float-right delete">X</button>
+
+          </li>
+
+          <li class="list-group-item">
+
+            Item 4
+
+            <button class="btn btn-edit btn-#ccc float-right edit">edit</button>
+
+            <button class="btn btn-danger btn-sm float-right delete">X</button>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+
+
+    <script src="main.js"></script>
+
+  </body>
+
+</html>
+
+
+
+//main.js//
+
+var form = document.getElementById("addForm");
+
+var itemList = document.getElementById("items");
+
+var filter = document.getElementById("filter");
+
+
+
+// Form submit event
+
+form.addEventListener("submit", addItem);
+
+
+
+// Delete event
+
+itemList.addEventListener("click", removeItem);
+
+
+
+// Filter event
+
+filter.addEventListener("keyup", filterItems);
+
+
+
+// Add item
+
+function addItem(e) {
+
+  e.preventDefault();
+
+
+
+  // Get input value
+
+  var newItem = document.getElementById("item").value;
+
+  var newdes = document.getElementById("description").value;
+
+
+
+  // Create new li element
+
+  var li = document.createElement("li");
+
+
+
+  // Add class
+
+  li.className = "list-group-item";
+
+
+
+  // Add text node with input value
+
+  li.appendChild(document.createTextNode(newItem));
+
+  li.appendChild(document.createTextNode(newdes));
+
+
+
+  // Create del button element
+
+  var editBtn = document.createElement("button");
+
+  var deleteBtn = document.createElement("button");
+
+
+
+  //Add classes to del button
+
+  editBtn.className = "btn btn-edit btn-#ccc float-right edit";
+
+  deleteBtn.className = "btn btn-danger btn-sm float-right delete";
+
+
+
+  // Append text node
+
+  editBtn.appendChild(document.createTextNode("edit"));
+
+  deleteBtn.appendChild(document.createTextNode("X"));
+
+
+
+  // Append button to li
+
+  li.appendChild(editBtn);
+
+  li.appendChild(deleteBtn);
+
+
+
+  // Append li to list
+
+  itemList.appendChild(li);
+
+}
+
+
+
+// Remove item
+
+function removeItem(e) {
+
+  if (e.target.classList.contains("delete")) {
+
+    if (confirm("Are You Sure?")) {
+
+      var li = e.target.parentElement;
+
+      itemList.removeChild(li);
+
+    }
+
+  }
+
+}
+
+
+
+// Filter Items
+
+function filterItems(e) {
+
+  //convert text to lowercase
+
+  var text = e.target.value.toLowerCase();
+
+  // Get all lis
+
+  var lis = itemList.getElementsByTagName("li");
+
+  //  Convert to an array
+
+  Array.from(lis).forEach(function (item) {
+
+    var itemName = item.firstChild.textContent;
+
+    var desName = item.lastChild.textContent;
+
+    if (
+
+      itemName.toLowerCase().indexOf(text) != -1 ||
+
+      desName.toLowerCase().indexOf(text) != -1
+
+    ) {
+
+      item.style.display = "block";
+
+    } else {
+
+      item.style.display = "none";
+
+    }
+
+  });
+
+}
