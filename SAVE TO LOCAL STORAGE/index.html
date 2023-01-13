@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>JS For Beginners</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>JS For Beginners</h1>
+    </header>
+
+    <section class="container">
+      <form id="my-form" onsubmit="saveToLs(event)">
+        <h1>Add User</h1>
+        <div class="msg"></div>
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" name="username" id="name"  required/>
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="text" name="emailid" id="email" required/>
+        </div>
+        <input class="btn" type="submit" value="Submit" />
+      </form>
+
+      <ul id="users"></ul>
+
+      
+
+    <script >
+        function saveToLs(event) {
+            event.preventDefault();
+            const name = event.target.username.value;
+            const emnail = event.target.emailid.value;
+            localStorage.setItem('name', name);
+            localStorage.setItem('email', email);
+
+        }
+
+
+    </script>
+
+    
+  </body>
+</html>
