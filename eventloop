@@ -1,0 +1,50 @@
+1)An execution context is a container that holds the state of a function execution. When a callback function is passed as an argument to another function, the execution context of the callback is created when the callback is invoked. The callback function is executed within the context of the outer function and has access to the variables and scope of the outer function. The execution context also manages the call stack, which keeps track of the order of function calls and allows for proper return values and error handling. Once the callback function has completed execution, the execution context is destroyed and the call stack pops the callback off the top.
+
+
+
+2) The global execution context is removed from the stack when the JavaScript program completes execution. This can happen when the program reaches the end of its code, or when an explicit call to the exit() or quit() function is made.
+
+Additionally, if the browser is closed or the JavaScript program is terminated by some other means, the global execution context will be removed from the stack as well.
+
+It's worth noting that the global execution context is created when the JavaScript program starts executing and it stays on the top of the stack throughout the program execution
+
+
+
+3)the DOM APIs create and store events in the event queue. The event loop checks the queue for new events and pushes them onto the call stack to be executed. Callback functions, which are passed as arguments to event listeners, are also added to the call stack and executed when the corresponding event is processed by the event loop.
+
+
+
+4)The callback queue is needed to handle the execution of callback functions in a non-blocking manner. In JavaScript, code execution is single-threaded, meaning that only one task can be executed at a time. This can cause delays if a task takes a long time to complete, as other tasks have to wait for it to finish.
+
+Callbacks are often used to handle asynchronous tasks, such as fetching data from a server or reading a file. These tasks can take a long time to complete, and if they were executed directly on the call stack, they would block the execution of other code.
+
+
+
+5)The fetch() function is used to make network requests in JavaScript. It returns a promise that resolves with the response of the request. A common pattern when using fetch() is to pass a callback function as a second argument to handle the response.
+
+
+
+6)The microtask queue is a queue that holds microtasks, which are small tasks that need to be executed as soon as possible. Microtasks are typically used for non-blocking operations such as promise callbacks, mutation observers, and process.nextTick() callbacks.
+
+The microtask queue is different from the callback queue in that it has higher priority and is processed before the callback queue. When the JavaScript engine finishes executing the current task on the call stack, it will first process all the microtasks on the microtask queue before moving on to the next task on the callback queue.
+
+
+
+
+
+7)Starvation refers to a situation where a task or process is unable to proceed because it is continually blocked by other tasks or processes. In the context of computer science, starvation is typically used to describe a situation in which a lower-priority task or process is unable to run because higher-priority tasks or processes are constantly using the resources it needs.
+
+
+
+
+
+8)A callback queue is used instead of a callback stack because a queue allows for more flexibility and control over the execution of callback functions.
+
+A stack is a Last In, First Out (LIFO) data structure, which means that the last item added to the stack is the first item that can be removed. A queue, on the other hand, is a First In, First Out (FIFO) data structure. This means that the first item added to the queue is the first item that can be removed.
+
+
+
+9)The event loop is a mechanism that allows JavaScript to handle asynchronous code execution. It does this by constantly checking the message queue for new messages (also called tasks or events) and the microtask queue for new microtasks. When a message is added to the queue, the event loop pushes the corresponding callback function onto the call stack to be executed.
+
+
+
