@@ -1,0 +1,312 @@
+//********************THIS*************/////
+
+
+
+
+1) In JavaScript, the "this" keyword refers to the object that the current function is a method of. The value of "this" can change depending on the context in which the function is called.
+
+There are several ways that the "this" keyword can be used:
+
+In a method: When "this" is used inside a method, it refers to the object that the method is a property of.
+In a constructor: When "this" is used inside a constructor function, it refers to the object being constructed.
+In a function: When "this" is used inside a function, it refers to the global object (i.e. window in a browser or global in Node.js)
+Using call,apply and bind: The "call" and "apply" methods allow you to explicitly set the value of "this" when calling a function. The "bind" method creates a new function with a fixed value of "this".
+Arrow functions : Arrow functions do not bind their own this, Instead, they inherit the this value of the enclosing scope.
+In class methods: Inside class methods, the value of this refers to the instance of the class.
+In event handlers: When used in an event handler, the value of "this" refers to the element that the event occurred on.
+2). snippet fo each of them
+
+
+
+const obj = {    //1
+
+  name: "viru",
+
+  sayName: function() {
+
+    console.log(this.name);
+
+  }
+
+}
+
+obj.sayName(); // "viru"
+
+ 
+
+--------------
+
+function Person(name) {     //2
+
+  this.name = name;
+
+}
+
+const viru= new Person("viru");
+
+console.log(viru.name); // "viru"
+
+
+
+----------
+
+function sayName() {      //3
+
+  console.log(this.name);
+
+}
+
+name = "viru";
+
+sayName(); // "viru"
+
+
+
+----------
+
+const obj = { name: "viru" }      //4
+
+
+
+function sayName() {
+
+  console.log(this.name);
+
+}
+
+sayName.call(obj); // "viru"
+
+sayName.apply(obj); // "viru"
+
+const boundSayName = sayName.bind(obj);
+
+boundSayName(); // "viru"
+
+
+
+----------
+
+const obj = {         //5
+
+  name: "viru",
+
+  sayName: () => {
+
+    console.log(this.name);
+
+  }
+
+}
+
+obj.sayName(); // undefined 
+
+
+
+-----------
+
+class Person {           //6
+
+  constructor(name) {
+
+    this.name = name;
+
+  }
+
+
+
+  sayName() {
+
+    console.log(this.name);
+
+  }
+
+}
+
+----------
+
+const viru= new Person("viru");        // 7
+
+viru.sayName(); // "viru"
+
+<button id="my-button">Click me</button>
+
+
+
+const button = document.getElementById("my-button");
+
+button.addEventListener("click", function() {
+
+  console.log(this); // the button element
+
+});
+
+
+
+
+
+3,4,5)
+
+
+
+class Student {
+
+  static studentCount = 0;
+
+  constructor(name, age, phone, marks) {
+
+    this.name = name;
+
+    this.age = age;
+
+    this.phone = phone;
+
+    this.marks = marks;
+
+    Student.studentCount++;  //to get the count
+
+  }
+
+
+
+  isEligible() {  // to check eligibility
+
+    return this.marks > 40;
+
+  }
+
+  static getNumberOfStudents(){
+
+    return Student.studentCount;
+
+  }
+
+}
+
+const student1 = new Student("viru", 20, 123, 45);  //5 students
+
+const student2 = new Student("gowda", 21, 9876543210, 35);
+
+const student3 = new Student("yashbhiyya", 22, 123, 50);
+
+const student4 = new Student("pramod", 23, 2222222, 30);
+
+const student5 = new Student("sharma", 24, 333333, 55);
+
+
+
+console.log(student1.name + " is eligible: " + student1.isEligible());  //printing their status
+
+console.log(student2.name + " is eligible: " + student2.isEligible());
+
+console.log(student3.name + " is eligible: " + student3.isEligible());
+
+console.log(student4.name + " is eligible: " + student4.isEligible());
+
+console.log(student5.name + " is eligible: " + student5.isEligible());
+
+
+
+console.log("Number of students created: " + Student.getNumberOfStudents()); //get the count
+
+
+
+
+
+
+
+
+
+
+
+///*****************FAT ARROW************/////////
+
+
+1) class Student {
+
+  constructor(name, age, phone, marks) {
+
+    this.name = name;
+
+    this.age = age;
+
+    this.phone = phone;
+
+    this.marks = marks;
+
+  }
+
+  isEligible() {
+
+    return this.marks > 40;
+
+  }
+
+  eligibleForPlacement(minMarks, minAge) {
+
+    return (age) => this.marks > minMarks && this.age > minAge;
+
+  }
+
+}
+
+
+
+const student1 = new Student("viru", 20, 123, 45);  
+
+const student2 = new Student("gowda", 21, 9876543210, 35);
+
+const student3 = new Student("yashbhiyya", 22, 123, 50);
+
+const student4 = new Student("pramod", 23, 2222222, 30);
+
+const student5 = new Student("sharma", 24, 333333, 55);
+
+
+
+const checkEligibility = student1.eligibleForPlacement(42, 21);
+
+const students = [student1, student2, student3, student4, student5];
+
+
+
+console.log("Eligible for placements:")
+
+students.forEach(student => {
+
+  if(checkEligibility(student.age))
+
+    console.log(student.name);
+
+});
+
+
+
+The eligibleForPlacement function returns a fat arrow function which takes age as an argument and checks if the student has board marks greater than minimum board marks required by company and is above the required age set by the company. Then I run this function for all the students and print the names of eligible students.
+
+
+
+
+
+4)  Fat arrow functions have a shorter and more concise syntax than normal functions. A fat arrow function is defined using the => operator, whereas a normal function is defined using the function keyword. 
+
+arguments object: arrow functions does not have arguments object, instead you need to use rest parameter. . etc
+
+
+
+5)The main motivation behind the introduction of fat arrow functions was to make the code more readable and easier to write, especially for functional programming constructs, such as callbacks and array methods (map, filter, reduce, etc.). 
+
+
+
+
+
+
+
+//********************************END********************//////////
+
+
+
+
+
+
+
+
