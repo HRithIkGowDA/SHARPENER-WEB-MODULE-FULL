@@ -1,0 +1,109 @@
+1) a b d (after timout) c 
+
+ REASON = pretty obvious answer , first 2 lines get executed later callback function gets executed and program waits for 1sec and c gets executed
+
+
+
+2) a b d c 
+
+REASON - no timeout direct execution
+
+
+
+3)a b d c e 
+
+REASON - abd executes first since no timeeout next c because 0 timeout later e since it has 1 sec to wait
+
+
+
+
+
+//*******SPREAD OPERATOR
+
+
+The spread operator (...) is a JavaScript operator that allows an iterable (such as an array or object) to be expanded in places where zero or more elements (for arrays) or properties (for objects) are expected.
+
+let obj1 = {a: 1, b: 2};
+
+let obj2 = {c: 3, d: 4};
+
+let mergedObject = {...obj1, ...obj2};
+
+console.log(mergedObject); // Output: {a: 1, b: 2, c: 3, d: 4}
+
+
+
+let array1 = [1, 2];
+
+let array2 = [3, 4];
+
+let mergedArray = [...array1, ...array2];
+
+console.log(mergedArray); // Output: [1, 2, 3, 4]
+
+
+
+
+
+
+
+
+
+
+
+
+
+4) 
+
+let studentobj = {'yash': 26,'vaibhav': 24,'rajesh' : 25};
+
+let sum = 0;
+
+let count = 0;
+
+for (const student in studentobj) {
+
+  sum += studentobj[student];
+
+  count++;
+
+}
+
+let averageAge = sum/count;
+
+console.log('Average age:', averageAge);
+
+
+
+
+
+
+
+
+
+5)function findAverageAge(studentobj) {
+
+  let sum = 0;
+
+  let count = 0;
+
+  for (const student in studentobj) {
+
+    sum += studentobj[student];
+
+    count++;
+
+  }
+
+  return sum/count;
+
+}
+
+
+
+let studentobj = {'yash': 26,'vaibhav': 24,'rajesh' : 25};
+
+console.log(findAverageAge(studentobj));
+
+
+
