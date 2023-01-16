@@ -1,0 +1,74 @@
+ JavaScript is a single-threaded programming language. This means that it can only process one task at a time.This means that JavaScript can't run multiple tasks simultaneously like a multi-threaded language, but it can use an asynchronous mechanism to execute multiple tasks in a non-blocking way. 
+
+
+
+1)inside x
+
+inside y
+
+timer expired
+
+
+
+2)inside x
+
+inside y
+
+timer2 expired
+
+timer1 expired
+
+
+
+3)inside x
+
+timer2 expired
+
+inside y
+
+timer1 expired
+
+
+
+4)When the browser runs the above program, it starts by executing the first line of code, which sets a timer using the setTimeout function. The function passed to setTimeout will execute after 1000 milliseconds (1 second) and will print "timer1 expired" to the console.
+
+The browser then moves on to the next line of code, which also sets a timer using the setTimeout function. The function passed to this setTimeout will execute after 0 milliseconds (i.e. as soon as possible) and will print "timer2 expired" to the console.
+
+The browser then goes on to execute the next block of code, which defines a function x that takes a single argument, y. Inside the function x, it prints "inside x" to the console and then calls the y function passed as an argument.
+
+The browser then goes on to execute the last block of code, which calls the x function and passes an anonymous function as an argument. The anonymous function sets a timer using setTimeout and after 0 milliseconds, it will print "inside y" to the console.
+
+As soon as the setTimeout function is called, the browser adds the callback function and the delay to the event queue, which is a queue that holds all the events that are yet to be executed.
+
+When the browser finishes executing the current block of code, it checks the event queue for any events that are ready to be executed. Since "timer2 expired" callback function is added with delay of 0, it will be executed immediately. And "inside y" will be printed in the console.
+
+After that, the browser waits for 1000 milliseconds (1 second) for the "timer1 expired" callback function to be executed and "timer1 expired" will be printed to the console.
+
+In summary, the browser goes about executing the above program by executing the code in sequence, adding the callback functions of the setTimeout calls to the event queue, and executing the events in the queue as soon as they are ready to be executed.
+
+
+
+5)<button id="myButton" onclick="console.log('clicked me')">Click me</button>  //inline html method
+
+
+
+
+
+6) document.addEventListener("DOMContentLoaded", function() {
+
+  console.log("DOM has loaded");
+
+});
+
+
+
+
+
+
+
+7)Garbage collection is a mechanism used by programming languages, such as JavaScript, to automatically free up memory that is no longer in use by the program. The idea behind garbage collection is that when a piece of data is no longer needed by the program, the memory occupied by that data can be reclaimed and used for other purposes.
+
+JavaScript uses a garbage collector called "Mark-and-Sweep" algorithm. it helps to prevent memory leaks and crashes caused by programs that do not release memory properly.
+
+
+
