@@ -2,4 +2,4 @@
 
 complete kickstarting with web completed. 
 demo finished
-moved to fe with react js
+moved to fe with react js..
